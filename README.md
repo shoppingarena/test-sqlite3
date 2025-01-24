@@ -27,8 +27,7 @@ git init
 ## Install sqlite3 and ORM sequelize
 
 pnpm add sqlite3
-
-# pnpm add sequelize
+pnpm add sequelize
 
 ## Initialize Sequelize
 

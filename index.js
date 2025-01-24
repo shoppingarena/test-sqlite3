@@ -8,25 +8,44 @@ const app = express()
 
 const db = new (verbose().Database)('test-sqlite3.db', (err) => {
     if (err) {
-        console.error('Error opening database: ', err.message);
+        console.error('sqlite: Error opening database: ', err.message);
     } else {
-        console.log('Openened databse: test-sqlite3.db');
+        console.log('sqlite: Openened databse: test-sqlite3.db');
     }
 })
-
+// Example: Close the database after some operations
+db.close((closeErr) => {
+    if (closeErr) {
+        console.error('sqlite: Error closing database: ', closeErr.message);
+    } else {
+        console.log('sqlite: Database connection closed.');
+    }
+});
 
 //TEST CONNECTION
 async function testConnection() {
+    let sequelize; // Declare sequelize outside the try block
     try {
         // Initialize Sequelize with SQLITE3 database
-        const sequelize = new Sequelize({
+        sequelize = new Sequelize({
             dialect: 'sqlite',
             storage: 'test-sqlite3.db' // Path to SQLite file
         })
         await sequelize.authenticate()
-        console.log('Connection has been established successfully.')
+        console.log('sequelize: Connection has been established successfully.')
     } catch (error) {
-        console.error('Unable to connect to the database:', error)
+        console.error('sequelize: Unable to connect to the database:', error)
+    } finally {
+        if (sequelize) {
+            try {
+                sequelize.close();
+                console.log('sequelize: Connection closed.');
+            } catch (closeError) {
+                console.error('sequelize: Error closing the connection:', closeError);
+            }
+        } else {
+            console.log('sequelize: No connection to close.');
+        }
     }
 }
 
