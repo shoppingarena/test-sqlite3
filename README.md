@@ -11,3 +11,8 @@ pnpm add nodemon
 
 touch .gitignore , copy template from <https://github.com/github/gitignore/blob/main/Node.gitignore>
 git init
+
+## Install sqlite3 and ORM sequelize
+
+pnpm add sqlite3
+pnpm add sequelize
