@@ -2,6 +2,8 @@
 
 ## Start prject with 'pnpm init'
 
+### add 'type': 'module' to treat .js file run as ES modules
+
 ## Install dependencies with 'pnpm add "package-name"'
 
 pnpm add express
@@ -16,3 +18,5 @@ git init
 
 pnpm add sqlite3
 pnpm add sequelize
+
+## Set up sequelize and sqlite3
