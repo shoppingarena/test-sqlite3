@@ -1,6 +1,6 @@
 # Test - SQLITE3 database
 
-## Start prject with 'pnpm init'
+## Start project with 'pnpm init'
 
 ### add 'type': 'module' to treat .js file run as ES modules
 

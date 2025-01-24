@@ -1,4 +1,5 @@
 import express from "express"
+import { Sequelize } from "sequelize" // import Sequelize v.6
 import sqlite3 from "sqlite3"
 const { verbose } = sqlite3
 
@@ -12,6 +13,24 @@ const db = new (verbose().Database)('test-sqlite3.db', (err) => {
         console.log('Openened databse: test-sqlite3.db');
     }
 })
+
+
+//TEST CONNECTION
+async function testConnection() {
+    try {
+        // Initialize Sequelize with SQLITE3 database
+        const sequelize = new Sequelize({
+            dialect: 'sqlite',
+            storage: 'test-sqlite3.db' // Path to SQLite file
+        })
+        await sequelize.authenticate()
+        console.log('Connection has been established successfully.')
+    } catch (error) {
+        console.error('Unable to connect to the database:', error)
+    }
+}
+
+testConnection()
 
 
 app.get("/", (req, res) => {
