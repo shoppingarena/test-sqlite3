@@ -1,7 +1,8 @@
 import express from "express"
-import { Sequelize } from "sequelize" // import Sequelize v.6
+
 import sqlite3 from "sqlite3"
 const { verbose } = sqlite3
+import { testConnection } from "./testConnection.mjs"
 
 
 const app = express()
@@ -23,32 +24,6 @@ db.close((closeErr) => {
 });
 
 //TEST CONNECTION
-async function testConnection() {
-    let sequelize; // Declare sequelize outside the try block
-    try {
-        // Initialize Sequelize with SQLITE3 database
-        sequelize = new Sequelize({
-            dialect: 'sqlite',
-            storage: 'test-sqlite3.db' // Path to SQLite file
-        })
-        await sequelize.authenticate()
-        console.log('sequelize: Connection has been established successfully.')
-    } catch (error) {
-        console.error('sequelize: Unable to connect to the database:', error)
-    } finally {
-        if (sequelize) {
-            try {
-                sequelize.close();
-                console.log('sequelize: Connection closed.');
-            } catch (closeError) {
-                console.error('sequelize: Error closing the connection:', closeError);
-            }
-        } else {
-            console.log('sequelize: No connection to close.');
-        }
-    }
-}
-
 testConnection()
 
 
